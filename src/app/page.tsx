@@ -1,0 +1,27 @@
+import type { ReactNode } from "react";
+import { certification, education, languages, lifecycle, projects, resumePath, skillMatrix, socials } from "@/data/portfolio";
+
+function Heading({ number, label, title, detail }: { number: string; label: string; title?: ReactNode; detail?: string }) {
+  return <div className="section-heading"><p className="eyebrow"><span>{number}</span>{label}</p><div>{title && <h2>{title}</h2>}{detail && <p className="section-detail">{detail}</p>}</div></div>;
+}
+
+function ProjectsSection() {
+  return <section className="content-section projects-section section-wrap" id="projects"><Heading number="01" label="RECENT WORK" title="Projects." /><div className="project-name-list">{projects.map((project) => <a className="project-name-link" data-mark={project.mark} href={`/projects/${project.slug}`} key={project.slug} aria-label={`View project: ${project.title}`}><span className="project-name">{project.title}</span><span className="project-name-arrow" aria-hidden="true">↗</span></a>)}</div></section>;
+}
+
+export default function Home() {
+  return <>
+    <header className="site-header"><div className="header-brand-group"><a className="wordmark" href="#home" aria-label="Vishal Panuganti, home">Vishal Panuganti</a><a className="nav-resume" href={resumePath} download>Resume <span aria-hidden="true">↗</span></a></div><nav className="site-nav" aria-label="Main navigation"><a href="#home">Home</a><a href="#projects">Projects</a><a href="#skills">Skills</a><a href="#contact">Contact</a></nav></header>
+    <main>
+      <section className="hero" id="home" aria-labelledby="hero-title">
+        <div className="hero-copy"><p className="eyebrow hero-eyebrow"><span>HI, I’M VISHAL</span></p><h1 id="hero-title"><span className="hero-title-primary">AI / ML</span><br /><span>ENGINEER.</span></h1><p className="hero-roles">Machine Learning <i /> Deep Learning <i /> Generative AI</p><p className="hero-summary">I build intelligent systems from data preparation and model development through deployment and analytics.</p><div className="hero-actions"><a className="button button-primary" href="#projects">Recent work <span aria-hidden="true">↘</span></a><a className="button button-secondary" href={resumePath} download>Download resume <span aria-hidden="true">↓</span></a></div><div className="hero-socials">{socials.map((item) => <a key={item.label} href={item.href} target={item.href.startsWith("https") ? "_blank" : undefined} rel={item.href.startsWith("https") ? "noreferrer" : undefined}>{item.label}<span aria-hidden="true">↗</span></a>)}</div></div>
+        <div className="hero-mark" aria-hidden="true">ML<span>.</span></div>
+      </section>
+      <ProjectsSection />
+<section className="content-section section-wrap" id="skills"><Heading number="04" label="SKILLS" title={<>Technical <span className="accent-word">Range.</span></>} /><div className="capability-grid">{skillMatrix.map((group, index) => <article className="capability-card" key={group.title}><p className="capability-index">{String(index + 1).padStart(2, "0")}</p><h3>{group.title}</h3><p className="capability-note">{group.note}</p><ul className="capability-core">{group.core.map((skill) => <li key={skill}>{skill}</li>)}</ul><p className="capability-more">{group.more.join(" · ")}</p></article>)}</div><div className="lifecycle-strip" aria-label={`AI lifecycle: ${lifecycle.join(", then ")}`}>{lifecycle.map((step, index) => <span key={step}>{step}{index < lifecycle.length - 1 && <i aria-hidden="true">→</i>}</span>)}</div></section>
+      <section className="content-section section-wrap" id="education"><Heading number="05" label="EDUCATION" title="Education & certification." /><div className="education-grid">{education.map((item) => <article className="education-entry" key={item.title}><p className="education-date">{item.date}</p><div><h3>{item.title}</h3><p>{item.detail}</p><p className="coursework-label">COURSEWORK</p><div className="coursework-tags">{item.coursework.map((course) => <span className="tech-tag" key={course}>{course}</span>)}</div></div><span className="education-mark">{item.mark}</span></article>)}<article className="certification-entry"><p className="workstream-label">CERTIFICATION</p><h3>{certification}</h3><span className="certification-symbol" aria-hidden="true">✳</span></article></div><div className="language-row"><span className="workstream-label">LANGUAGES</span><p>{languages.map((language, index) => <span key={language}>{index > 0 && <i />}{language}</span>)}</p></div></section>
+      <section className="contact-section section-wrap" id="contact"><div className="contact-topline"><p className="eyebrow">CONTACT</p><span>LET’S TALK ENGINEERING</span></div><h2>Let’s build<br /><span>intelligent systems.</span></h2><a className="contact-email" href="mailto:panugantivishal3.14@gmail.com">panugantivishal3.14@gmail.com <span aria-hidden="true">↗</span></a><div className="contact-bottom"><div className="contact-socials">{socials.filter((item) => item.label !== "Email").map((link) => <a key={link.label} href={link.href} target="_blank" rel="noreferrer">{link.label}<span aria-hidden="true">↗</span></a>)}</div><a className="button button-primary" href={resumePath} download>Download resume <span aria-hidden="true">↓</span></a></div></section>
+    </main>
+    <footer className="site-footer section-wrap"><a className="wordmark" href="#home">VP<span>.</span></a><span>Vishal Panuganti · AI / ML Engineer</span><a href="#home">Back to top ↑</a><span>© {new Date().getFullYear()}</span></footer>
+  </>;
+}

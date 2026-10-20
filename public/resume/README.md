@@ -1,0 +1,1 @@
+Place the actual resume PDF in this folder as `vishal-panuganti-resume.pdf`. The portfolio download links reference `/resume/vishal-panuganti-resume.pdf`. No placeholder PDF is provided.
