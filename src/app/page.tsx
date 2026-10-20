@@ -25,3 +25,4 @@ export default function Home() {
     <footer className="site-footer section-wrap"><a className="wordmark" href="#home">VP<span>.</span></a><span>Vishal Panuganti · AI / ML Engineer</span><a href="#home">Back to top ↑</a><span>© {new Date().getFullYear()}</span></footer>
   </>;
 }
+
